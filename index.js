@@ -66,11 +66,11 @@ client.on('messageCreate', async (msg)=>{
 			if (parts.length > 1) {
 				expression = parts.slice(1).join(' ');
 			}
-			let result = evaluateExpression(expression).toFixed(2);
+			let result = evaluateExpression(expression);
 		
 			if (typeof result === 'number' && !isNaN(result)) {
 				await msg.channel.sendTyping();
-				msg.reply('The answer to this is ' + result);
+				msg.reply('The answer to this is ' + result.toFixed(2));
 			} else {
 				await msg.channel.sendTyping();
 				msg.reply(result);
@@ -110,7 +110,7 @@ function evaluateExpression(expression) {
     const result = eval(expression);
 
     if (typeof result === 'number' && !isNaN(result)) {
-      return result;
+      return result
       // Perform additional actions if the result is a number
     } else {
       return 'Sorry I don\'t understand what you\'re saying. The correct format for this command is \'evaluate expression\', for example \'evaluate 1+1\'.';
